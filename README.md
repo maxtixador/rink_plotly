@@ -1,4 +1,4 @@
-# Your Package Name (Replace with the actual package name)
+# Rink_Plotly
 
 ## Overview
 Rink_Plotly is a Python library that provides a convenient and interactive way to plot hockey rinks using the Plotly graphing library. Whether you need to visualize full ice, offensive or defensive zones, or specific areas on the hockey rink, this package simplifies the process of creating customizable and visually appealing rink diagrams.
