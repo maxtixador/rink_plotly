@@ -4,6 +4,7 @@ setup(
     name='rink-plotly',  # Replace 'your-package-name' with the desired package name
     version='0.1.0',           # Set an appropriate version number
     packages=find_packages(),
+    scripts=['rink_plotly/rink_plot.py'],
     install_requires=[
         'numpy',
         'plotly',
