@@ -2,6 +2,7 @@
 import numpy as np
 import plotly.graph_objects as go
 
+
 def rink(setting = "full", vertical = False):
     '''
     Function to plot rink in Plotly. Takes 2 arguments :
@@ -11,20 +12,8 @@ def rink(setting = "full", vertical = False):
 
     '''
 
-    def faceoff_circle(x, y):
-        theta = np.linspace(0, 2*np.pi, 300)
-        # Outer circle
-        x_outer = x + 15*np.cos(theta)
-        y_outer = y + 15*np.sin(theta)
-        outer_circle = go.Scatter(x=x_outer, y=y_outer, mode='lines', line=dict(width=2, color='red'), showlegend=False, hoverinfo='skip')
-        # Inner circle
-        x_inner = x + np.cos(theta)
-        y_inner = y + np.sin(theta)
-        inner_circle = go.Scatter(x=x_inner, y=y_inner, mode='lines', fill='toself', fillcolor='rgba(255, 0, 0, 0.43)', line=dict(color='rgba(255, 0, 0, 1)', width=2), showlegend=False, hoverinfo='skip')
-        
-        
-        return [outer_circle, inner_circle]  #segments
     
+    #Initialize figure
     fig = go.Figure()
 
     if vertical :
