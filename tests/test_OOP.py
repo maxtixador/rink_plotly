@@ -9,7 +9,7 @@ class Rink:
         self.fig = go.Figure()
 
 
-    def _faceoff_circle(x, y):
+    def _faceoff_circle(self, x, y):
         '''
         Function to plot faceoff circles in Plotly. Takes 2 arguments :
         x : x coordinate of the center of the circle
@@ -25,7 +25,7 @@ class Rink:
         x_inner = x + np.cos(theta)
         y_inner = y + np.sin(theta)
         inner_circle = go.Scatter(x=x_inner, y=y_inner, mode='lines', fill='toself', fillcolor='rgba(255, 0, 0, 0.43)', line=dict(color='rgba(255, 0, 0, 1)', width=2), showlegend=False, hoverinfo='skip')
-        return [outer_circle, inner_circle]  #segments
+        self.fig.add_traces([outer_circle, inner_circle])
 
     def _goal_crease(self,flip=1, vertical = False):
         '''
@@ -45,7 +45,7 @@ class Rink:
         }
 
         # Selecting the right settings
-        gc_settings = settings["vertical"] if vertical else settings["horizontal"]
+        gc_settings = settings["vertical"] if self.direction == "vertical" else settings["horizontal"]
         
         self.fig.add_trace(go.Scatter(x = gc_settings["x"],
                                     y = gc_settings["y"],
@@ -72,16 +72,15 @@ class Rink:
         common_layout = {
             "xaxis": dict(showgrid=False, zeroline=False, showticklabels=False),
             "yaxis": dict(showgrid=False, zeroline=False, showticklabels=False, constrain="domain"),
-            "showlegend": not vertical,
             "autosize": True,
             "template": "plotly_white"
         }
 
         if self.direction == "vertical":
             common_layout["xaxis"].update(range=[-42.6, 42.6])
-            common_layout["yaxis"].update(range=settings[setting])
+            common_layout["yaxis"].update(range=settings[self.setting])
         else:
-            common_layout["xaxis"].update(range=settings[setting])
+            common_layout["xaxis"].update(range=settings[self.setting])
             common_layout["yaxis"].update(range=[-42.6, 42.6])
 
 
@@ -148,9 +147,8 @@ class Rink:
             self.fig.add_shape(type='line', xref='x', yref='y', x0=89, y0=-goal_line_extreme, x1=89, y1=goal_line_extreme, line=dict(color='red', width=2))
             self.fig.add_shape(type='line', xref='x', yref='y', x0=-89, y0=-goal_line_extreme, x1=-89, y1=goal_line_extreme, line=dict(color='red', width=2))
 
-        return fig
 
-    def _sidelines(fig):
+    def _sidelines(self):
         '''
         Function to plot sidelines in Plotly. Takes 2 arguments :
         fig : figure object
@@ -194,16 +192,16 @@ class Rink:
 
 
         if self.direction == "vertical" :
-            fig.add_traces(self._faceoff_circle(-22, 69))
-            fig.add_traces(self._faceoff_circle(22, 69))
-            fig.add_traces(self._faceoff_circle(-22, -69))
-            fig.add_traces(self._faceoff_circle(22, -69))
+            self._faceoff_circle(-22, 69)
+            self._faceoff_circle(22, 69)
+            self._faceoff_circle(-22, -69)
+            self._faceoff_circle(22, -69)
 
         else :
-            fig.add_traces(self._faceoff_circle(-69, -22))
-            fig.add_traces(self._faceoff_circle(-69, 22))
-            fig.add_traces(self._faceoff_circle(69, -22))
-            fig.add_traces(self._faceoff_circle(69, 22))
+            self._faceoff_circle(-69, -22)
+            self._faceoff_circle(-69, 22)
+            self._faceoff_circle(69, -22)
+            self._faceoff_circle(69, 22)
             
             
 
@@ -211,5 +209,5 @@ class Rink:
 
 
 # Example usage:
-rink = Rink(setting="full", vertical=False)
+rink = Rink(setting="full", vertical=True)
 rink.plot()
