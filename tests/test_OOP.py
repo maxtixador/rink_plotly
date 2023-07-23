@@ -27,7 +27,7 @@ class Rink:
         inner_circle = go.Scatter(x=x_inner, y=y_inner, mode='lines', fill='toself', fillcolor='rgba(255, 0, 0, 0.43)', line=dict(color='rgba(255, 0, 0, 1)', width=2), showlegend=False, hoverinfo='skip')
         self.fig.add_traces([outer_circle, inner_circle])
 
-    def _goal_crease(self,flip=1, vertical = False):
+    def _goal_crease(self,flip=1):
         '''
         Function to plot goal crease in Plotly. Takes 1 argument :
         vertical : True if you want a vertical rink, False (default) is for an horizontal rink
